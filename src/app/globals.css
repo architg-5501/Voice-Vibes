@@ -14,6 +14,9 @@
   -webkit-backdrop-filter: blur(0.2px);
 }
 
+/* .modal {
+  background-color: red !important;
+} */
 
 @layer utilities {
   .text-balance {
