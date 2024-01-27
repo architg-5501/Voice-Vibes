@@ -14,10 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
 
-    <html lang="en" data-theme="cdark">
+    <html lang="en" >
+      {/* <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp" />
+      <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" /> */}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
-      <script></script>
+
       <body className="min-h-screen flex flex-col">
         {/* <Navbar /> */}
         {children}

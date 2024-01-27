@@ -1,87 +1,20 @@
 'use client';
 import React, { useEffect, useState } from "react";
-
 import { Image } from 'antd';
 import { Button, message, Space } from 'antd';
+
 export default function Upload() {
     const [messageApi, contextHolder] = message.useMessage();
     const [userInput, setUserInput] = useState("sad");
-    const giphyAPIkey = "wmgf096vzH3vdPwy4O4A6VmGu004cUl6";
+
     const [imgPath, setImgPath] = useState('//media1.giphy.com/media/OPU6wzx8JrHna/200.gif?cid=f694e415k4xyr2f4yakafs9z9w1hkb3c5pchh75vrweth2s8&ep=v1_gifs_search&rid=200.gif&ct=g');
     const [isLoading, setLoading] = useState(false);
-    // useEffect(() => {
-    //     document.getElementById('my_modal_2').showModal();
-    // }, [])
-    // const sendMsg = async (event) => {
-    //     try {
-    //         // setLoading(true);
-    //         messageApi.open({
-    //             type: 'loading',
-    //             content: '𝐃𝐄𝐓𝐄𝐂𝐓𝐈𝐍𝐆 𝐄𝐌𝐎𝐓𝐈𝐎𝐍',
-    //         });
-    //         const audioFile = event.target.files[0];
-    //         if (file) {
-    //             reader.onload = async (e) => {
-    //                 console.log(e.target.result);
-    //                 const base64AudioData = e.target.result.split(',')[1];
-    //                 const jsonPayload = {
-    //                     audioData: base64AudioData,
-    //                     fileName: 'Audio File', // You can customize the file name
-    //                 };
-    //                 console.log("send msg");
-    //                 const res = await fetch("http://127.0.0.1:5000/upload", {
-    //                     method: 'POST',
-    //                     headers: {
-    //                         'Content-Type': 'application/json',
-    //                     },
-    //                     body: JSON.stringify(jsonPayload),
-    //                 });
 
-    //                 if (res.ok) {
-    //                     const resData = await res.json();
-    //                     console.log(resData.message);
-    //                     setUserInput(resData.message);
-    //                     let giphyAPIURL = `https://api.giphy.com/v1/gifs/search?q=${resData.message}&rating=g&api_key=${giphyAPIkey}`;
-
-    //                     fetch(giphyAPIURL)
-    //                         .then(function (data) {
-    //                             return data.json();
-    //                         })
-    //                         .then(function (json) {
-    //                             console.log(json.data[0].images.fixed_height.url);
-    //                             setImgPath(json.data[0].images.fixed_height.url);
-    //                         }).then(function () {
-    //                             messageApi.open({
-    //                                 type: 'success',
-    //                                 content: '𝐄𝐌𝐎𝐓𝐈𝐎𝐍 𝐃𝐄𝐓𝐄𝐂𝐓𝐄𝐃',
-    //                             });
-    //                             // setLoading(false);
-    //                             setTimeout(() => {
-    //                                 document.getElementById('my_modal_2').showModal();
-
-    //                             }, 1000)
-
-    //                         });
-    //                 } else {
-    //                     messageApi.open({
-    //                         type: 'error',
-    //                         content: 'Error Occured',
-    //                     });
-    //                     console.error('Failed to send message');
-    //                 }
-    //             }
-    //         };
-    //     } catch (error) {
-    //         messageApi.open({
-    //             type: 'error',
-    //             content: 'Error Occured',
-    //         });
-    //         console.error('Error:', error);
-    //     }
-    // };
     const sendMsg = async (event) => {
         try {
             // setLoading(true);
+            console.log("good morning");
+            // console.log(process.env.NEXT_GIFHY_API_KEY);
             messageApi.open({
                 type: 'loading',
                 content: '𝐃𝐄𝐓𝐄𝐂𝐓𝐈𝐍𝐆 𝐄𝐌𝐎𝐓𝐈𝐎𝐍',
@@ -98,7 +31,7 @@ export default function Upload() {
                         const base64AudioData = e.target.result.split(',')[1];
                         const jsonPayload = {
                             audioData: base64AudioData,
-                            fileName: 'Audio File', // You can customize the file name
+                            fileName: 'Audio File',
                         };
 
                         console.log("send msg");
@@ -115,7 +48,7 @@ export default function Upload() {
                             console.log(resData);
                             setUserInput(resData.message);
 
-                            let giphyAPIURL = `https://api.giphy.com/v1/gifs/search?q=${resData.message}&rating=g&api_key=${giphyAPIkey}`;
+                            let giphyAPIURL = `https://api.giphy.com/v1/gifs/search?q=${resData.message}&rating=g&api_key=${process.env.NEXT_PUBLIC_GIFHY_API_KEY}`;
 
                             fetch(giphyAPIURL)
                                 .then(function (data) {
@@ -165,7 +98,7 @@ export default function Upload() {
 
     return (
 
-        < div className="flex flex-row justify-center" >
+        < div className="flex flex-row justify-center " >
             {contextHolder}
             <input
                 type="file"
